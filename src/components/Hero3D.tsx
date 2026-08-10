@@ -4,13 +4,30 @@ import { WebGLFallback } from './WebGLFallback';
 
 const Hero3DScene = lazy(() => import('./Hero3DScene'));
 
+type IdleWindow = Window & {
+  requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number;
+  cancelIdleCallback?: (handle: number) => void;
+};
+
+type NetworkNavigator = Navigator & {
+  connection?: { saveData?: boolean };
+};
+
 function supportsWebGL() {
   try {
     const canvas = document.createElement('canvas');
-    return Boolean(window.WebGLRenderingContext && (canvas.getContext('webgl2') || canvas.getContext('webgl')));
+    return Boolean(
+      window.WebGLRenderingContext &&
+        (canvas.getContext('webgl2', { powerPreference: 'high-performance' }) ||
+          canvas.getContext('webgl', { powerPreference: 'high-performance' })),
+    );
   } catch {
     return false;
   }
+}
+
+function dataSaverEnabled() {
+  return Boolean((navigator as NetworkNavigator).connection?.saveData);
 }
 
 export function Hero3D() {
@@ -20,15 +37,29 @@ export function Hero3D() {
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(motion.matches);
-    update();
-    setWebgl(supportsWebGL());
-    const id = window.requestIdleCallback ? window.requestIdleCallback(() => setReady(true), { timeout: 900 }) : window.setTimeout(() => setReady(true), 250);
-    motion.addEventListener?.('change', update);
+    const updateMotion = () => setReducedMotion(motion.matches);
+    updateMotion();
+
+    const canRender3D = supportsWebGL() && !dataSaverEnabled();
+    setWebgl(canRender3D);
+
+    const idleWindow = window as IdleWindow;
+    let cancelReady = () => undefined;
+
+    if (canRender3D) {
+      if (idleWindow.requestIdleCallback) {
+        const handle = idleWindow.requestIdleCallback(() => setReady(true), { timeout: 900 });
+        cancelReady = () => idleWindow.cancelIdleCallback?.(handle);
+      } else {
+        const handle = window.setTimeout(() => setReady(true), 250);
+        cancelReady = () => window.clearTimeout(handle);
+      }
+    }
+
+    motion.addEventListener?.('change', updateMotion);
     return () => {
-      motion.removeEventListener?.('change', update);
-      if (window.cancelIdleCallback && typeof id === 'number') window.cancelIdleCallback(id);
-      else clearTimeout(id);
+      motion.removeEventListener?.('change', updateMotion);
+      cancelReady();
     };
   }, []);
 
