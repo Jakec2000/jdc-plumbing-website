@@ -1,0 +1,7 @@
+import { Check, Gauge, HardHat, SearchCheck } from 'lucide-react';
+import { business } from '../config/business';
+import { QuoteButton } from './Actions';
+
+const points = [['Find the cause','Diagnosis comes before replacement. The aim is to fix the fault, not just the symptom.',SearchCheck],['Price before proceeding','Scope and likely cost are explained before the job moves ahead wherever practical.',Gauge],['Protect the property','Careful access, tidy work areas and clean handover are part of the job.',HardHat],['Build for maintenance','Installations are planned with future access, servicing and durability in mind.',Check]] as const;
+
+export function WhyJdc() { return <section className="section why" id="why-jdc"><div className="container why-grid"><div className="why-panel"><div className="why-orbit" aria-hidden="true"><span/><span/><span/></div><div className="why-monogram">JDC</div><div className="why-stamp"><b>{business.yearsExperience}+</b><span>YEARS EXPERIENCE</span></div></div><div className="why-copy"><div className="eyebrow">WHY JDC</div><div className="gold-rule"/><h2>Good plumbing should disappear into the property.</h2><p className="section-lead">No recurring leaks, no awkward service access and no wondering what was done. The best result is a system that simply works.</p><div className="why-points">{points.map(([title,text,Icon]) => <div className="why-point" key={title}><Icon/><div><h3>{title}</h3><p>{text}</p></div></div>)}</div><QuoteButton location="why-jdc" dark/></div></div></section>; }
