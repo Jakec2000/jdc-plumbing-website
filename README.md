@@ -80,3 +80,7 @@ The 3D JDC medallion is procedural, so no logo file is required. If an official 
 The current form does not persist personal data. It generates a pre-filled email in the visitor's mail client. This is intentionally simple and avoids a database/spam surface.
 
 Future upgrade: add a Cloudflare Turnstile-protected `/api/lead` function, email delivery provider and optional CRM/QuoteFlow integration.
+
+## Verification
+
+GitHub CI installs from the public npm registry, runs strict TypeScript checks and produces the production Vite build before deployment.
