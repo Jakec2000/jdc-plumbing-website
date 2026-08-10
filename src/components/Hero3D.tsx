@@ -44,7 +44,7 @@ export function Hero3D() {
     setWebgl(canRender3D);
 
     const idleWindow = window as IdleWindow;
-    let cancelReady = () => undefined;
+    let cancelReady: () => void = () => {};
 
     if (canRender3D) {
       if (idleWindow.requestIdleCallback) {
