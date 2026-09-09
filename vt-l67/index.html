@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="VT Recommission" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>VT L67 Recommission</title>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <div class="kicker">1997 VT SS • L67 SUPERCHARGED</div>
+        <h1>Recommission</h1>
+      </div>
+      <div class="progress-number" id="progressText">0%</div>
+    </div>
+
+    <div class="progress-wrap" aria-label="Checklist progress">
+      <div class="progress-line"><div id="progressBar"></div></div>
+      <span id="countText">0 / 0 complete</span>
+    </div>
+
+    <div id="gate" class="gate">Checking critical items…</div>
+  </header>
+
+  <main>
+
+    <section class="next-card" id="nextCard">
+      <div class="next-topline">
+        <span class="next-kicker" id="nextPhase">BEFORE START</span>
+        <span class="next-step" id="nextStep">Step 1</span>
+      </div>
+
+      <h2 id="nextTitle">Set up fire and spill safety</h2>
+      <p id="nextSummary" class="next-summary">Safety & initial inspection</p>
+
+      <details class="next-details" id="nextDetails">
+        <summary>How to do it</summary>
+        <ol id="nextInstructions"><li>Work outside or in a well-ventilated area.</li><li>Keep a suitable automotive fire extinguisher within reach.</li><li>Have absorbent material ready for old fuel, oil or coolant.</li><li>Do not smoke or create sparks around the fuel system.</li></ol>
+      </details>
+
+      <div class="next-actions">
+        <button id="markNextDone" class="btn primary big">Mark done</button>
+        <button id="showInChecklist" class="btn big">Show in checklist</button>
+      </div>
+    </section>
+
+    <div class="checklist-heading">
+      <div>
+        <span class="eyebrow-small">FULL CHECKLIST</span>
+        <h2>Everything to do</h2>
+      </div>
+      <span id="phaseStatus" class="phase-status"></span>
+    </div>
+
+    <section class="action-row" aria-label="Checklist actions">
+      <button id="nextCritical" class="btn primary">Next critical</button>
+      <button id="toggleAll" class="btn">Expand all</button>
+
+      <details class="tools-menu">
+        <summary class="btn">More</summary>
+        <div class="tools-panel">
+          <button id="exportBtn" class="menu-btn">Export progress</button>
+          <button id="resetBtn" class="menu-btn danger">Reset checklist</button>
+        </div>
+      </details>
+    </section>
+
+    <section class="priority-strip" aria-label="Priority key">
+      <span><i class="p-dot critical"></i>Before start</span>
+      <span><i class="p-dot important"></i>Before driving</span>
+      <span><i class="p-dot followup"></i>After start</span>
+    </section>
+
+    <section id="checklistLoader" class="checklist-loader"><button id="loadChecklist" class="btn">Open full checklist</button><span>Only loads when you need it</span></section>
+    <div id="sections"></div>
+
+    <details class="utility-card card">
+      <summary>
+        <span>Workshop notes</span>
+        <span class="muted">tap to open</span>
+      </summary>
+      <textarea id="globalNotes" rows="7" placeholder="Voltages, leaks, noises, DTCs, parts replaced…"></textarea>
+    </details>
+
+    <details class="utility-card card">
+      <summary>
+        <span>First-start sequence</span>
+        <span class="muted">6 steps</span>
+      </summary>
+      <ol class="first-start-list">
+        <li>Bonnet open, extinguisher nearby, helper watching for leaks.</li>
+        <li>Key ON first. Check for fuel leaks before cranking.</li>
+        <li>Crank only after oil priming. Stop for grinding or heavy cranking.</li>
+        <li>Oil warning must go out promptly after start. If not, shut down.</li>
+        <li>Keep revs low. Watch temperature, charging, belts, smoke and leaks.</li>
+        <li>Shut down for knock, grinding, fuel leak, coolant dump or overheating.</li>
+      </ol>
+    </details>
+  </main>
+
+  <footer>Progress saves on this device • offline-ready when installed</footer>
+
+  <script src="data-1.js"></script>
+  <script src="data-2.js"></script>
+  <script src="app-core.js"></script>
+</body>
+</html>
