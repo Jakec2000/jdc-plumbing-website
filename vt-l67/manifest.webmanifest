@@ -1,0 +1,12 @@
+{
+  "name": "VT L67 Recommission Checklist",
+  "short_name": "VT Recommission",
+  "description": "Offline recommission checklist for a 1997 Holden Commodore VT Series I L67 3.8 Supercharged.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0c0f",
+  "theme_color": "#101114",
+  "orientation": "portrait-primary",
+  "icons": []
+}
